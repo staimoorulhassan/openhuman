@@ -44,13 +44,17 @@ test.describe('Skills registry flow', () => {
   });
 
   test('channels tab renders messaging connectors', async ({ page }) => {
-    await page.getByRole('tab', { name: 'Channels' }).click();
+    // Use force:true to bypass the Joyride walkthrough overlay that can intercept
+    // pointer events when the tour hasn't fully dismissed before this click.
+    await page.getByRole('tab', { name: 'Channels' }).click({ force: true });
     await expect(page.getByRole('heading', { name: 'Channels' })).toBeVisible();
     await expect(page.getByText(/Telegram|Discord|Slack/).first()).toBeVisible();
   });
 
   test('mcp tab shows the placeholder panel', async ({ page }) => {
-    await page.getByRole('tab', { name: 'MCP Servers' }).click();
+    // Use force:true to bypass the Joyride walkthrough overlay that can intercept
+    // pointer events when the tour hasn't fully dismissed before this click.
+    await page.getByRole('tab', { name: 'MCP Servers' }).click({ force: true });
     await expect(page.getByRole('heading', { name: 'MCP Servers' }).first()).toBeVisible();
     await expect(page.getByText(/coming soon|early alpha|MCP/i).first()).toBeVisible();
   });
